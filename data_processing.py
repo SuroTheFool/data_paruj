@@ -1,5 +1,17 @@
 import csv, os
 
+# Let's write a function to filter out only items that meet the condition
+# Hint: condition will be associated with an anonymous function, e.x., lamdbda x: max(x)
+def filter(condition, dict_list):
+    temps = []
+    for item in dict_list:
+        if condition(item):
+            temps.append(item)
+    return temps
+# Let's write a function to do aggregation given an aggregation function and an aggregation key
+def aggregate(aggregation_key, aggregation_function, dict_list):
+    pass
+
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
@@ -10,53 +22,9 @@ with open(os.path.join(__location__, 'Cities.csv')) as f:
         cities.append(dict(r))
 
 # Print first 5 cities only
-for city in cities[:5]:
-    print(city)
-
-# Print the average temperature of all the cities
-print("The average temperature of all the cities:")
-temps = []
-for city in cities:
-    temps.append(float(city['temperature']))
-print(sum(temps)/len(temps))
-print()
-
-# Print the average temperature of all the cities
-print("The average temperature of all the cities:")
-temps = [float(city['temperature']) for city in cities]
-print(sum(temps)/len(temps))
-print()
-
-# Print all cities in Germany
-
-for city in cities:
-    if city["country"] == "Germany":
-        print(city['city'])
-
-# Print all cities in Spain with a temperature above 12°C
-print()
-for city in cities:
-    if city["country"] == "Spain":
-        if float(city["temperature"]) > 12:
-            print(city['city'])
+my_list = filter(lambda x: x['country'] == 'Germany', cities)
+# All cities germany
+fil_list = filter(lambda x: x['country'] == 'Germany', cities)
+print(fil_list)
 
 
-# Count the number of unique countries
-
-for city in cities:
-    unique = set(city["country"])
-print()
-print(f"{len(unique)}")
-# Print the average temperature for all the cities in Germany
-
-print("The average temperature of all the cities in germany:")
-temps = [float(city['temperature']) for city in cities if city["country"] == "Germany"]
-print(sum(temps)/len(temps))
-print()
-
-# Print the max temperature for all the cities in Italy
-
-print("The max temperature of all the cities in Italy:")
-temps = [float(city['temperature']) for city in cities if city["country"] == "Italy"]
-print(max(temps))
-print()
