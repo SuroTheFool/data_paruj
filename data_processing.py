@@ -32,8 +32,8 @@ class Table:
     def filter(self, predicate):
         filtered_table = [row for row in self.table if predicate(row)]
         return Table(self.name, filtered_table)
-    def aggregate(self, func    , column):
-        try:
+    def aggregate(self, func, column):
+        try: 
             column_values = [float(row[column]) for row in self.table]
         except ValueError:
             column_values = [row[column] for row in self.table]
@@ -81,5 +81,5 @@ print()
 # Print the max temperature for all the cities in Italy
 my_value = my_table1.filter(lambda x: x['country'] == 'Italy').aggregate(lambda x: max(x), 'temperature')
 print("The max temperature of all the cities in Italy:")
-print(my_value)
+print(my_value) 
 print()
