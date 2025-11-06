@@ -10,7 +10,10 @@ def filter(condition, dict_list):
     return temps
 # Let's write a function to do aggregation given an aggregation function and an aggregation key
 def aggregate(aggregation_key, aggregation_function, dict_list):
-    pass
+    values = []
+    for item in dict_list:
+        values.append(item[aggregation_key])
+    return aggregation_function(values)
 
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
